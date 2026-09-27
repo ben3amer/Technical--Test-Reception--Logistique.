@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="ReceptionLogistique.Application/ReceptionLogistique.Application.csproj" Id="2731b4e1-a943-4e78-bcb6-410b4a0997c7" />
+    <Project Path="ReceptionLogistique.Infrastructure/ReceptionLogistique.Infrastructure.csproj" Id="37adc497-19b7-4b60-8e59-f2a0d30e4917" />
+    <Project Path="ReceptionLogistique.WebApi/ReceptionLogistique.WebApi.csproj" Id="5308628e-7597-462c-8059-5684b9e67390" />
+    <Project Path="ReceptionLogistique/ReceptionLogistique.Domain.csproj" Id="80165452-08be-4fa2-a777-80a8c8b2e3a0" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="ReceptionLogistique.Application.Tests/ReceptionLogistique.Application.Tests.csproj" Id="9275cbcc-262f-4713-a66f-e05b665c5022" />
+  </Folder>
+</Solution>
