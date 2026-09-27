@@ -4,6 +4,26 @@ namespace ReceptionLogistique.Domain.Entities
 {
     public class Product
     {
+        public Product(
+            string reference,
+            string name,
+            string color,
+            string size,
+            int expectedQuantity)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(reference);
+            ArgumentException.ThrowIfNullOrWhiteSpace(name);
+
+            if (expectedQuantity <= 0)
+                throw new ArgumentOutOfRangeException(nameof(expectedQuantity));
+
+            Ref = reference;
+            Name = name;
+            Color = color;
+            Size = size;
+            ExpectedQuantity = expectedQuantity;
+        }
+
         public string Ref { get; private set; } = null!;
         public string Name { get; private set; } = null!;
         public string Color { get; private set; } = null!;

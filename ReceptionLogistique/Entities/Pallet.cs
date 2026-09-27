@@ -4,9 +4,21 @@ namespace ReceptionLogistique.Domain.Entities
 {
     public class Pallet
     {
-        private readonly List<Carton> _cartons = [];
+        private readonly List<Carton> _cartons;
 
-        public string Id { get; private set; } = null!;
+        public Pallet(string id, IEnumerable<Carton> cartons)
+        {
+            ArgumentException.ThrowIfNullOrWhiteSpace(id);
+            ArgumentNullException.ThrowIfNull(cartons);
+
+            Id = id;
+            _cartons = cartons.ToList();
+
+            if (_cartons.Count == 0)
+                throw new ArgumentException("A pallet must contain at least one carton.", nameof(cartons));
+        }
+
+        public string Id { get; private set; }
 
         public IReadOnlyCollection<Carton> Cartons => _cartons;
 
@@ -14,10 +26,10 @@ namespace ReceptionLogistique.Domain.Entities
         {
             get
             {
-                if (_cartons.All(x => x.Status == ReceptionStatus.Received))
+                if (_cartons.All(c => c.Status == ReceptionStatus.Received))
                     return ReceptionStatus.Received;
 
-                if (_cartons.All(x => x.Status == ReceptionStatus.NotReceived))
+                if (_cartons.All(c => c.Status == ReceptionStatus.NotReceived))
                     return ReceptionStatus.NotReceived;
 
                 return ReceptionStatus.PartiallyReceived;
@@ -27,7 +39,15 @@ namespace ReceptionLogistique.Domain.Entities
         public void Receive()
         {
             foreach (var carton in _cartons)
+            {
                 carton.Receive();
+            }
+        }
+
+        public void ReceiveCarton(string cartonId)
+        {
+            var carton = _cartons.Single(c => c.Id == cartonId);
+            carton.Receive();
         }
     }
 }

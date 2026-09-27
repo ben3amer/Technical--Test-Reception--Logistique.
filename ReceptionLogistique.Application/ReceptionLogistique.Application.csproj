@@ -1,12 +1,20 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net10.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
 <ItemGroup>
 	<ProjectReference Include="..\ReceptionLogistique\ReceptionLogistique.Domain.csproj" />
+</ItemGroup>
+<ItemGroup>
+  <PackageReference Include="MediatR" Version="13.1.0" />
+</ItemGroup>
+<ItemGroup>
+  <Folder Include="Common\Behaviors\" />
+  <Folder Include="Interfaces\" />
+  <Folder Include="DTOs\" />
 </ItemGroup>
 </Project>

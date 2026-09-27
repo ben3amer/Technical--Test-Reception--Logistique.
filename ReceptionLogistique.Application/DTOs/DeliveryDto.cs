@@ -7,10 +7,4 @@ namespace ReceptionLogistique.Application.DTOs
         ReceptionStatus Status,
         ReceptionProgressDto Progress,
         IReadOnlyCollection<PalletDto> Pallets);
-
-    public record PalletDto(
-        string PalletId,
-        ReceptionStatus Status,
-        ReceptionProgressDto Progress,
-        IReadOnlyCollection<CartonDto> Cartons);
 }
