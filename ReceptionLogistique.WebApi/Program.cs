@@ -32,8 +32,8 @@ using (var scope = app.Services.CreateScope())
     DeliverySeeder.Seed(db);
 }
 
-app.UseMiddleware<ReceptionLogistique.WebApi.Middleware.ExceptionMiddleware>();
 app.UseCors("Frontend");
+app.UseMiddleware<ReceptionLogistique.WebApi.Middleware.ExceptionMiddleware>();
 
 if (app.Environment.IsDevelopment())
 {
