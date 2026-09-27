@@ -1,0 +1,43 @@
+﻿using ReceptionLogistique.Domain.Enums;
+
+namespace ReceptionLogistique.Domain.Entities
+{
+    public class Product
+    {
+        public string Ref { get; private set; } = null!;
+        public string Name { get; private set; } = null!;
+        public string Color { get; private set; } = null!;
+        public string Size { get; private set; } = null!;
+        public int ExpectedQuantity { get; private set; }
+
+        public int ReceivedQuantity { get; private set; }
+
+        public ReceptionStatus Status
+        {
+            get
+            {
+                if (ReceivedQuantity == 0)
+                {
+                    return ReceptionStatus.NotReceived;
+                }
+
+                if (ReceivedQuantity >= ExpectedQuantity)
+                {
+                    return ReceptionStatus.Received;
+                }
+
+                return ReceptionStatus.PartiallyReceived;
+            }
+        }
+
+        public void Receive()
+        {
+            ReceivedQuantity = ExpectedQuantity;
+        }
+
+        public void Unreceive()
+        {
+            ReceivedQuantity = 0;
+        }
+    }
+}
