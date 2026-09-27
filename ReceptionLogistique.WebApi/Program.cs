@@ -1,4 +1,7 @@
+using Microsoft.EntityFrameworkCore;
 using ReceptionLogistique.Application;
+using ReceptionLogistique.Infrastructure.Persistence;
+using ReceptionLogistique.Infrastructure.Persistence.Seed;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +13,13 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 
 var app = builder.Build();
+
+using (var scope = app.Services.CreateScope())
+{
+    var db = scope.ServiceProvider.GetRequiredService<ReceptionLogistiqueDbContext>();
+    await db.Database.MigrateAsync();
+    DeliverySeeder.Seed(db);
+}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
