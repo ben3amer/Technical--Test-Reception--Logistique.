@@ -12,7 +12,7 @@ namespace ReceptionLogistique.Domain.Entities
             ArgumentNullException.ThrowIfNull(cartons);
 
             Id = id;
-            _cartons = cartons.ToList();
+            _cartons = [.. cartons];
 
             if (_cartons.Count == 0)
                 throw new ArgumentException("A pallet must contain at least one carton.", nameof(cartons));
