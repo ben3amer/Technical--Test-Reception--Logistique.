@@ -33,6 +33,7 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseMiddleware<ReceptionLogistique.WebApi.Middleware.ExceptionMiddleware>();
+app.UseCors("Frontend");
 
 if (app.Environment.IsDevelopment())
 {
