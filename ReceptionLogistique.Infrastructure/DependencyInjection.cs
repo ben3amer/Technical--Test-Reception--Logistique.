@@ -15,9 +15,6 @@ namespace ReceptionLogistique.Infrastructure
                 options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
 
             services.AddScoped<IDeliveryRepository, DeliveryRepository>();
-            services.AddScoped<ICartonRepository, CartonRepository>();
-            services.AddScoped<IPalletRepository, PalletRepository>();
-            services.AddScoped<IProductRepository, ProductRepository>();
 
             return services;
         }

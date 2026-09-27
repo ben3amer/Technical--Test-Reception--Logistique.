@@ -14,6 +14,7 @@
 </ItemGroup>
 <ItemGroup>
   <Folder Include="Common\Behaviors\" />
+  <Folder Include="Features\Delivery\Queries\" />
   <Folder Include="Interfaces\" />
   <Folder Include="DTOs\" />
 </ItemGroup>

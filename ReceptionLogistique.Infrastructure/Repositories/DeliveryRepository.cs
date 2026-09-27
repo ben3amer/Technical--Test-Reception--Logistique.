@@ -1,42 +1,31 @@
-﻿using ReceptionLogistique.Application.Interfaces;
+﻿using Microsoft.EntityFrameworkCore;
+using ReceptionLogistique.Application.Interfaces;
 using ReceptionLogistique.Domain.Entities;
+using ReceptionLogistique.Infrastructure.Persistence;
 
 namespace ReceptionLogistique.Infrastructure.Repositories
 {
     public class DeliveryRepository : IDeliveryRepository
     {
-        public DeliveryRepository()
+        private readonly ReceptionLogistiqueDbContext _context;
+
+        public DeliveryRepository(ReceptionLogistiqueDbContext context)
         {
+            _context = context;
         }
 
-        public async Task<Delivery?> GetByIdAsync(string orderId, CancellationToken cancellationToken)
+        public async Task<Delivery?> GetByOrderIdAsync(string orderId, CancellationToken cancellationToken)
         {
-            // Implementation to retrieve a delivery by its ID from the database
-            throw new NotImplementedException();
+            return await _context.Deliveries
+                .Include(d => d.Pallets)
+                    .ThenInclude(p => p.Cartons)
+                        .ThenInclude(c => c.Products)
+                .FirstOrDefaultAsync(d => d.OrderId == orderId, cancellationToken);
         }
 
-        public async Task SaveAsync(Delivery delivery, CancellationToken cancellationToken)
+        public async Task SaveChangesAsync(CancellationToken cancellationToken)
         {
-            // Implementation to save the delivery to the database
-            throw new NotImplementedException();
-        }
-
-        public async Task<string> UpdateAsync(Delivery delivery, CancellationToken cancellationToken)
-        {
-            // Implementation to update the delivery in the database
-            throw new NotImplementedException();
-        }
-
-        public async Task<IEnumerable<Delivery>> GetAllAsync(CancellationToken cancellationToken)
-        {
-            // Implementation to retrieve all deliveries from the database
-            throw new NotImplementedException();
-        }
-
-        public async Task<string> AddAsync(Delivery delivery, CancellationToken cancellationToken)
-        {
-            // Implementation to add a new delivery to the database
-            throw new NotImplementedException();
+            await _context.SaveChangesAsync(cancellationToken);
         }
     }
 }

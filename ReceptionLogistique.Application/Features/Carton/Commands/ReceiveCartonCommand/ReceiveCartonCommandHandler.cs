@@ -10,11 +10,11 @@ public class ReceiveCartonCommandHandler(IDeliveryRepository repository)
 {
     public async Task<DeliveryDto> Handle(ReceiveCartonCommand request, CancellationToken cancellationToken)
     {
-        var delivery = await repository.GetByIdAsync(request.OrderId, cancellationToken)
+        var delivery = await repository.GetByOrderIdAsync(request.OrderId, cancellationToken)
             ?? throw new KeyNotFoundException($"Delivery '{request.OrderId}' was not found.");
 
         delivery.ReceiveCarton(request.PalletId, request.CartonId);
-        await repository.SaveAsync(delivery, cancellationToken);
+        await repository.SaveChangesAsync(cancellationToken);
 
         return delivery.ToDeliveryDto();
     }

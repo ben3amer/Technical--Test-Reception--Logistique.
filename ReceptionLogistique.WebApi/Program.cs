@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using ReceptionLogistique.Application;
+using ReceptionLogistique.Infrastructure;
 using ReceptionLogistique.Infrastructure.Persistence;
 using ReceptionLogistique.Infrastructure.Persistence.Seed;
 
@@ -7,6 +8,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddApplication();
+builder.Services.AddInfrastructure(builder.Configuration);
 
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
@@ -26,6 +28,8 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseMiddleware<ReceptionLogistique.WebApi.Middleware.ExceptionMiddleware>();
 
 app.UseHttpsRedirection();
 
