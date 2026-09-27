@@ -4,6 +4,8 @@ namespace ReceptionLogistique.Domain.Entities
 {
     public class Product
     {
+        private Product() { }
+
         public Product(
             string reference,
             string name,

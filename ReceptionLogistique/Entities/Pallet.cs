@@ -4,7 +4,9 @@ namespace ReceptionLogistique.Domain.Entities
 {
     public class Pallet
     {
-        private readonly List<Carton> _cartons;
+        private readonly List<Carton> _cartons = [];
+
+        private Pallet() { }
 
         public Pallet(string id, IEnumerable<Carton> cartons)
         {

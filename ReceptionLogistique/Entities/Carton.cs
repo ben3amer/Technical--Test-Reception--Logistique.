@@ -4,7 +4,9 @@ namespace ReceptionLogistique.Domain.Entities
 {
     public class Carton
     {
-        private readonly List<Product> _products;
+        private readonly List<Product> _products = [];
+
+        private Carton() { }
 
         public Carton(string id, IEnumerable<Product> products)
         {

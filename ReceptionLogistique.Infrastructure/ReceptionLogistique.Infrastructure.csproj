@@ -11,9 +11,6 @@
     <ProjectReference Include="..\ReceptionLogistique\ReceptionLogistique.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\" />
-  </ItemGroup>
 
   <ItemGroup>
     <PackageReference Include="Base.Npgsql" Version="1.0.11" />

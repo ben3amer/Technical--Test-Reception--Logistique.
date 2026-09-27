@@ -29,8 +29,7 @@ namespace ReceptionLogistique.Infrastructure.Persistence.Configurations
             builder.Property(p => p.ExpectedQuantity)
                 .IsRequired();
 
-            builder.Property(p => p.Status)
-                .IsRequired();
+            builder.Ignore(p => p.Status);
         }
     }
 }
